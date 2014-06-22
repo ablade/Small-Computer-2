@@ -1,0 +1,32 @@
+
+[indentation]
+indent_width=4
+indent_type=1
+indent_hard_tab_width=8
+detect_indent=false
+detect_indent_width=false
+indent_mode=2
+
+[project]
+name=SC_2
+base_path=/home/alvin/Project Folders/Geanyprojects
+description=
+
+[long line marker]
+long_line_behaviour=1
+long_line_column=72
+
+[files]
+current_page=5
+FILE_NAME_0=0;C;0;16;1;1;0;/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27/alu.c;0;4
+FILE_NAME_1=0;C;0;16;1;1;0;/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27/alu.h;0;4
+FILE_NAME_2=0;C;0;16;1;1;0;/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27/globals.h;0;4
+FILE_NAME_3=0;C;0;16;1;1;0;/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27/memory.c;0;4
+FILE_NAME_4=0;C;0;16;1;1;0;/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27/memory.h;0;4
+FILE_NAME_5=0;C;0;16;1;1;0;/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27/phase1test.c;0;4
+FILE_NAME_6=0;C;0;16;1;1;0;/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27/register.c;0;4
+FILE_NAME_7=0;C;0;16;1;1;0;/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27/register.h;0;4
+FILE_NAME_8=0;C;0;16;1;1;0;/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27/registerFile.h;0;4
+
+[VTE]
+last_dir=/home/alvin/Project Folders/Geanyprojects/SC_Phase1_Jan27

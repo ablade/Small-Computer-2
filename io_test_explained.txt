@@ -1,0 +1,85 @@
+3000
+1600  ; Point $RC to where the string starts
+3048  ; Address of where the string starts
+1100  ; LDA $R2 with 0x00A
+000A  ; $R2 , to test for new line (0D 0A Enter)
+1200  ;
+4000  ; The address to save the person's name
+1280 
+3026  ; Address of the subroutine
+A280  ; Jump to subrotine
+26A4  ; MOV $RC $R5
+C180  ; Ask for the person's name getchr() store in R3
+4991  ; Subract $R3 $R2 check for enter key
+9019  ; if zero (user hit enter) branch 8 instructions down(6 from pc)
+C181  ; echo R3
+2982  ; move R3 to memory
+87F4  ; branch back to C180 to get char
+2802  ; load 00 null char to indicate the end of the string (user's name) 
+A280  ; Go to subroutine and  ask a question to the user
+C180  ; Get char for Y/N ?
+2624  ; point the ip-0 to the starting address of the string user's name
+1300  ; Chech condition
+0079  ; load with 'y'
+49B1  ; Subtract R3 R6
+9029  ; branch zero
+1300  ; Chech condition
+0059  ; load with 'Y'
+49B1  ; Subtract R3 R6
+9009  ; branch zero
+8002  ; if not zero branch to D000
+A280  ; Branch zero to subrotine
+D000  ; Subroutine Load the string to R1 print it out to the screen
+1882  ; LDB &$R1 Load the string to R1
+488D  ; OR $R1 $R1 check if its a null character
+9011  ; branch zero to B000 or RET
+C081  ; OUT $R1
+87F6  ; branch back unconditional
+B000  ; branch zero here
+4865  ; Below are just ascii characters
+6C6C
+6F21
+2050
+6c65
+6173
+6520
+656e
+7465
+7220
+796f
+7572
+206e
+616d
+6520
+3a20
+000d
+0a44
+6f20
+796f
+7520
+7761
+6e74
+2074
+6f20
+7072
+696e
+7420
+796f
+7572
+206e
+616d
+6520
+592f 
+4e20
+3f00
+
+The io test works as follows first it loads the registers with the value 
+for checking if the enter key was typed, the value of where the start of
+the greeting string is at, the value of where the subroutine is located.
+The subroutine prints out every character encounter till it encounters 
+the end of the string then it returns.  The subroutine is called three
+times if the user answers "yes" for printing his/her name.  The first
+time the subroutine is used is for the greeting, the second is when the
+question is posed to the user if he/she would like their name printed, 
+and the third would be printing their name.  This program also makes use
+of branch zero and branch unconditional.

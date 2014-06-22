@@ -1,0 +1,157 @@
+3000   ; Start                              we expect PC to be 3000
+1600   ; LDA $RC                           IP-0 set to x3000
+3000   ; load this value to $RC
+1680   ; LDA $RD                           IP-1 set to x3000
+32FE   ; load this value to $RD
+1700   ; LDA $RE                            we expect $RE(Base Pointer) to have the value 3004
+3004   ; load this value to $RE             
+1580   ; LDA $RB                            we expect $RB to have the value 3002
+3002   ; load this value to $RB             
+1780   ; LDA $RF
+3300   ;                                   SP $RF to have a value 3300
+18D8   ; LDB $R1 $RB                       we expect $R1 to get x30 from third line inst. (30FF) 
+2158   ; LDW $R2 $RB                       we expect $R2 to get x30FF from third line inst
+0984   ; LDI $R3 #4                        we expect $R3 to get x0004
+1A19   ; LDB $R4 %$R3                      we expect $R4 to get 15 because (BP + %$R# -> 3004 + 4) from line 6 (1580)
+2299   ; LDW $R5 %$R3                      we expect $R5 to get 1580 from line 6
+1B02   ; LDB &$R6                          we expect to get 16 then 18 , 30, FF, 17 .... 
+1B02
+1B02
+1B02
+1B02
+1B02
+1B02
+1B02
+1B02
+1B02
+256C  ; MOV $RA $RD
+25E4  ; MOV $RD $RC
+2614
+2382  ; LDW &$R7
+2382
+2382
+2382
+2382
+2382
+2382
+2382
+35E8 ; STW $RB $RD     ; // M[$Ra] ← ($Rs(hob)); M[$Ra + 1] ← ($Rs(lob))
+1C53 ; LDB $R8 $RA     ; Places 0x30 on $R8 lob (this value was taken from memory location x30A0)
+2453 ; LDW $R8 $RA     ; Places the word x3004 in $R8 ($RA points to 30FF and memory 30FF points at x30A0
+29E8 ; STB $R3 $RD     ; // M[$Ra] ← ($Rs(lob)) Places x04 into 30FF
+2A99 ; STB $R3 $R3     ; // M[BP + $Ra] ← ($Rs(lob)) we expect mem x3008 to have 00 in its lob
+2A19 ; STB $R4 $R3     ; // M[BP + $Ra] ← ($Rs(lob)) we expect mem x3008 to have 17 
+3519 ; STW $RB $RD     ;// M[BP + $RD] ← ($RB(hob)); M[BP + $RD + 1] ← ($RB(lob)) ; we expect to have x3008 to have 30FF
+2802 ; STB &$R0        ;// M[IP-1] ← ($Rs(lob)); IP-1 ← IP-1 + 1 
+2882 ; STB &$R1        ;// index mode, register 0xD
+2902 ; STB &$R2
+2982 ; ...
+2A02 ; ...
+2A82
+2B02
+2B82
+2C02
+2C82
+2D02
+2D82
+2E02
+2E82
+2F02
+2F82
+2F82
+3002  ; STW &$R0      // M[IP-1] ← ($Rs(hob)); IP-1 ← IP-1 + 1;                                              
+3082  ; STW &$R1      // M[IP-1] ← ($Rs(lob)); IP-1 ← IP-1 + 1
+3102  ; STW &$R2      // index mode, register 0xD
+3182  ;    :
+3202  ;    :
+3282  ;    :
+3302
+3382
+3402
+3482
+3502
+3582
+3602
+3682
+3702
+3782
+2D5B   STB     $RA, @$RB                 // M[M[$Ra]] ← ($Rs(lob)) // indirect mode  ; FF is placed in mem x3004
+355B   STW     $RA, @$RB       // M[M[$Ra]] ← ($Rs(hob)); // M[M[$Ra + 1]] ← ($Rs(lob)) // indirect mode
+3E81   PUSHB $RD
+3802   POPB $R0
+3E83   PUSHW $RD 
+3C84   POPW $R9
+4898
+4899
+489A
+489B
+489C
+489D
+489E
+489F
+4080   BSL $R1   ; expect $R0 to be x60
+5080   BSR $R1   ; expect $R0 to be x18
+1300   LDA $R6 with 7FFF
+7FFF
+8006   BR to line 489F
+489C   Sets zero flag
+9019
+8008   Goes to the line 4B18
+489F   Sets negative flag
+97D8   BrN line above containing 489C
+4899   Sets the Carry Flag
+97DA   BrZ line abvoe containing 8008
+4B18   ADD $R6 R$3 Sets overflow
+902B
+489C   Sets Zero
+9981
+0000
+4899
+9982
+489F  Sets negative flag
+8006  Jumps past the BR up 20
+4B18  Sets overflow // unreachable
+9983  //unreachable
+87EC  BR up 20 or PC - 20
+9980  BrN $R3
+0000
+0000
+4B18  Sets zero flag
+9983  
+0000
+0000
+1280  Sets R5 to 3100
+3100
+1200  Set R4 to A
+000A
+A280  Jumps to 3100
+0000
+0000
+4A28   ADD $R5 $R4
+2284   MOV $R5 $R0
+489F   Sets negative flag 
+AA80   Jump to address in $R5 and store PC to the stack
+0000
+4A28    ADD $R5 $R4
+2284    MOV $R5 $R0
+489C    Sets zero flag
+AA81    Jumps to address in $R5
+801E    Jumps to line with the value 8004
+4A28    
+2284
+4899
+AA82
+0000
+4A28
+2284
+4B18
+AA83
+8004
+B800
+0000
+B801
+0000
+B7C0
+D000
+
+
